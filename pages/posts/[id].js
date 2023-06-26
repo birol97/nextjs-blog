@@ -19,7 +19,13 @@ export default function Post({ postData }) {
       </Layout>
     );
   }
-  
+  export async function getStaticPaths() {
+  const paths = getAllPostIds();
+  return {
+    paths,
+    fallback: false,
+  };
+}
   export async function getStaticProps({ params }) {
     // Add the "await" keyword like this:
     const postData = await getPostData(params.id);
@@ -31,10 +37,4 @@ export default function Post({ postData }) {
     };
   }
 
-export async function getStaticPaths() {
-  const paths = getAllPostIds();
-  return {
-    paths,
-    fallback: false,
-  };
-}
+
